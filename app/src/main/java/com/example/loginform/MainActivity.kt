@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -24,6 +26,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.example.loginform.ui.components.OutlinedTextFieldWithTrailingIcon
 import com.example.loginform.ui.theme.LoginFormTheme
 
 class MainActivity : ComponentActivity() {
@@ -45,14 +49,21 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun LoginForm(modifier: Modifier = Modifier) {
     var username by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+
+
     Column (
-        modifier = modifier.background(Color.Gray)
+        modifier = modifier
+            .background(Color.White)
+            .fillMaxWidth()
+            .padding(all = 16.dp)
     ){
         // I'm creating the Base UI Component Here
         OutlinedTextField(
-            placeholder = { Text("Username")},
             value = username,
             onValueChange = {username = it},
+            label = { Text("Username")},
+            placeholder = { Text("Enter your username")},
 
             modifier = Modifier.fillMaxWidth(),
 
@@ -67,8 +78,39 @@ fun LoginForm(modifier: Modifier = Modifier) {
 
         )
 
+        OutlinedTextFieldWithTrailingIcon(
+            password,
+            onValueChangeFunc = {password=it},
+            "Password",
+            "Enter your password",
+            Icons.Filled.Lock,
+            "Lock icon",
+            true
+        )
+
+        Button(onClick = {
+            clickHandler(username,password)},
+            modifier= Modifier.padding(top=16.dp)
+        ) { Text("Click to View in LogCat")}
+
+
     }
+
 }
+
+fun clickHandler(usernameValue:String, passwordValue:String) {
+
+    if (usernameValue.isEmpty() || passwordValue.isEmpty()) {
+        //Can view the result using LogCat
+        println("Username or password cannot be empty")
+    } else {
+        //Can view the result using LogCat
+        println("Username: $usernameValue")
+        println("Password: $passwordValue")
+    }
+
+}
+
 
 @Preview(showBackground = true)
 @Composable

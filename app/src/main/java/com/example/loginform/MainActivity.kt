@@ -78,6 +78,7 @@ fun LoginForm(modifier: Modifier = Modifier) {
 
         )
 
+        // This is reusable component
         OutlinedTextFieldWithTrailingIcon(
             password,
             onValueChangeFunc = {password=it},
@@ -88,6 +89,7 @@ fun LoginForm(modifier: Modifier = Modifier) {
             true
         )
 
+        // Let's add an button and set an click handelr function
         Button(onClick = {
             clickHandler(username,password)},
             modifier= Modifier.padding(top=16.dp)
@@ -98,6 +100,8 @@ fun LoginForm(modifier: Modifier = Modifier) {
 
 }
 
+
+// Click handler function for the button
 fun clickHandler(usernameValue:String, passwordValue:String) {
 
     if (usernameValue.isEmpty() || passwordValue.isEmpty()) {
@@ -110,6 +114,8 @@ fun clickHandler(usernameValue:String, passwordValue:String) {
     }
 
 }
+
+
 
 
 @Preview(showBackground = true)
